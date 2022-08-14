@@ -1,9 +1,9 @@
 FROM devopsedu/webapp
-RUN mkdir docker
-WORKDIR /docker
-RUN yum update -y
-RUN yum install httpd
-RUN rm -f /var/www/html/index.html
-ADD https://github.com/edureka-devops/projCert.git  /var/www/html
+RUN apt-get update
+RUN apt-get install -y apache2
+RUN apt-get install -y apache2-utils
+RUN apt-get clean
 EXPOSE 80
-CMD [“/usr/sbin/httpd”, “-D”, “FOREGROUND”]
+RUN rm /var/www/html/index.html
+ADD https://github.com/edureka-devops/projCert.git  /var/www/html
+CMD apachectl -D FOREGROUND
